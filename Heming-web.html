@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Heming Zhang</title>
+		<!--font-->
+		 <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+		 <!--jQuery-->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+
+		<style>
+/*basic*/
+		body, input, select, textarea {
+		color: #555555;
+		font-family: 'Raleway', sans-serif;
+		font-size: 13pt;
+		font-weight: 300;
+		line-height: 1.75em;
+	}
+	p, ul, ol, dl, table, blockquote {
+		margin: 0 0 2em 0;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+		font-weight: 800;
+		line-height: 1.75em;
+		margin-bottom: 1em;
+	}
+	h1 {
+	font-size: 3em;
+	line-height: 2em;
+}
+
+	h2 {
+		font-size: 1.3em;
+		font-weight: normal;
+	}
+
+	h3 {
+		font-size: 1.25em;
+	}
+
+	sub {
+		font-size: 0.8em;
+		position: relative;
+		top: 0.5em;
+	}
+
+	sup {
+		font-size: 0.8em;
+		position: relative;
+		top: -0.5em;
+	}
+
+	hr {
+		border-top: solid 1px #888888;
+		border: 0;
+		margin-bottom: 1.5em;
+	}
+
+	blockquote {
+		border-left: solid 0.5em #888888;
+		font-style: italic;
+		padding: 1em 0 1em 2em;
+	}
+
+	section.special, article.special {
+		text-align: center;
+	}
+
+	header.major {
+		padding-bottom: 4em;
+	}
+
+	header h2 {
+		margin: 0;
+		padding: 0;
+		font-size: 2.5em;
+		font-weight: 600;
+	}
+
+	header .byline {
+		font-size: 30px; 
+		font-weight: bold;"
+	}
+
+	footer > :last-child {
+		margin-bottom: 0;
+	}
+
+	footer.major {
+		padding-top: 3em;
+	}
+	/* Image */
+
+	.image {
+		border: 0;
+		position: center;
+	}
+
+		.image.fit {
+			display: block;
+		}
+
+			.image.fit img {
+				display: block;
+				width: 60%;
+			}
+
+		.image.feature {
+			display: block;
+			margin: 0 0 2em 0;
+		}
+
+			.image.feature img {
+				padding-left: 26em;
+				display: block;
+				width: 27%;
+			}
+		
+
+			/* Wrapper */
+
+	.wrapper.style1 {
+		background: #fff;
+	}
+
+	.wrapper.style2 {
+		background: #ececec;
+		padding: 2em 0;
+		text-align: center;
+	}
+
+	.wrapper.style3 {
+		padding: 2em 0 3.5em 0;
+		background: #ececec;
+	}
+
+		.wrapper.style3 span {
+			display: inline-block;
+			padding-top: 0.80em;
+			font-size: 2em;
+			font-weight: 600;
+		}
+
+		.wrapper.style3 .button {
+			float: right;
+		}
+
+/* Header */
+
+	#header {
+		background: #333333 url("http://i.imgur.com/UgKmfyH.jpg") no-repeat;
+		background-size: cover;
+		color: #fff;
+		padding: 6em 0;
+		text-align: center;
+		background-position: 0% 65%;
+		position: relative;
+	}
+
+		#header:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(16, 32, 48, 0.25);
+		}
+
+		#header > * {
+			position: relative;
+			z-index: 1;
+		}
+
+	.homepage #header {
+		padding: 1em 0;
+		background-position: center;
+	}
+
+	#logo {
+		padding-top: 0.4em;
+		font-size: 2.8em;
+		font-weight: 700;
+		color: rgb(247, 247, 247);
+		line-height: 1.2em;
+		position: relative;
+	}
+
+	#nav > ul {
+		margin: 0;
+	}
+
+		#nav > ul > li {
+			border-radius: 10px 10px 0 0;
+			display: inline-block;
+			margin-left: 0.5em;
+			padding: 0.5em 1.5em;
+		}
+
+			#nav > ul > li a {
+				color: #FFF;
+				text-decoration: none;
+				font-size: 1.2em;
+			}
+
+			#nav > ul > li:first-child {
+				margin-left: 0;
+			}
+
+			#nav > ul > li:hover a {
+				color: #fff;
+			}
+
+			#nav > ul > li.active {
+				background: #3ac984;
+			}
+
+				#nav > ul > li.active a {
+					color: white;
+				}
+
+			#nav > ul > li > ul {
+				display: none;
+			}
+
+/* Main */
+
+	.no-sidebar #main .major, .left-sidebar #main .major, .right-sidebar #main .major {
+		text-align: left;
+	}
+
+	.homepage #main .major {
+		text-align: center;
+	}
+
+	#main {
+		padding: 6em 0;
+	}
+
+		#main .sidebar .major {
+			padding-bottom: 2em;
+		}
+
+			#main .sidebar .major h2 {
+				font-size: 1.8em;
+			}
+
+		#main .sidebar .default li {
+			border-color: #cdcdcd;
+		}
+
+		#main .sidebar .default a {
+			color: #464646;
+		}
+
+		#main .sidebar > :first-child {
+			margin-bottom: 3em;
+		}
+
+			#maintext {
+			padding-top: 4em;
+			padding-left:10em;
+			padding-right:9em;
+			padding-top: 2em;
+			padding-bottom: 1em;
+			font-size: 15px;
+			line-height: 1.5em;
+			word-spacing: 0.7px;
+			background: #ececec;
+			text-align: justify;
+		}
+		/* Footer */
+
+	#footer {
+		padding: 1em 0;
+		font-weight: 20;
+		color: #2a2c30;
+	}
+
+		#footer .major h2 {
+			font-size: 2em;
+			color: #fff;
+		}
+
+		#footer .major .byline {
+			font-size: 1.1em;
+		}
+
+		#footer .copyright {
+			padding-top: 2em;
+			border-top: 1px solid;
+			font-weight: bold;
+			border-color: rgba(192, 192, 192, 0.15);
+			text-align: center;
+			color: inherit;
+		}
+
+		#footer a {
+			color: inherit;
+		}
+
+		html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+            
+			#map1 {
+				text-align: center;
+				background: #ececec;
+			}
+            #map {
+            	background: #ececec;
+            	padding-left:8em;
+            	padding-top: 2em;
+                height: 80%;
+                width: 80%;
+
+            }
+
+            .buttons {
+                position: absolute;
+                top: 1905px;
+                left: 480px;
+            }
+
+            button {
+                background: white;
+            }
+
+            #pdf{
+			padding-left:2em;
+			padding-right:2em;
+			padding-top: 2em;
+			padding-bottom: 1em;
+            }
+
+            #pdfimg{
+            	background: #ececec;
+            	width: 100%;
+            	height: 100 %;
+            }
+        </style>
+
+        <!--link rel="stylesheet" href="ASSN7/style.css" /-->
+	</head>
+
+<body>
+</head>
+	<body class="homepage">
+
+		<!-- Header -->
+			<div id="header">
+				<div class="container">
+						
+					<!-- Logo -->
+						<h1 id="logo">Chinatown Rethinks<br>Walkable Neighborhood
+						<br>由中国城开始反思步行社区的定义
+						</h1>
+					
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li>Home • 首页</a></li>
+								<li>About • 简介</a>
+								</li>
+								<li>Methods • 方法论</a></li>
+								<li>Interview • 观点</a></li>
+								<li>Workshop • 工作坊</a></li>
+							
+							</ul>
+						</nav>
+						
+				</div>
+			</div>
+	<div id="maintext" >
+				<section class="container">
+			<p>
+				The current analysis of walkability is mostly only focus on the quantitative data or physical conditions of built environment. However, as social creatures, pedestrians are more influenced by social and economic characteristics. For example,  Chinatown, which is ranked as the third most walkable neighborhood by Walk Score, is facing dramatically changes and suffering poor physical conditions. If the local businesses are replaced by young professional businesses, and Chinatown has some beatification projects, then I am afraid this neighborhood will lose its affordability and the gathering places for low-income immigrants, which may destroy the local culture and social networks. 
+			</p>
+			<p>
+				The majority of researchers and planners more depends on observation rather than interactive survey. Lacking public participation and real engagement is one of the the key issue here. For instance, in some report, they compared Chinatown with other neighborhoods and design guides and said Chinatown is lacking bike racks, sidewalk seats, and the intercity bus station is a problem for pedestrians. This statement is true, but the issues they identified are not the real demands or problems for locals. Only a few researchers tried to develop some qualitative research, but they are still lacking systematical analysis on how to design conversation.
+			</p>
+				</section>
+	</div>
+
+
+		<!-- Featured -->
+			<div class="wrapper style2">
+				<section class="container">
+					<header class="major">
+						<h2>What is walkable neighborhood?</h2>
+						<span class="byline">什么样的社区适合步行？</span>
+					</header>
+
+					<div class="subimage">
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/xnPmAUz.jpg" alt=""></a>
+							<p style="font-size:20px; font-weight: bold;">ACCESSIBILITY<br>步行可通达</p>
+						</section>
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/kkL38sh.jpg" alt=""></a>
+							<p style="font-size:20px; font-weight: bold;">AFFORDABILITY<br>经济可负担</p>
+						</section>
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/q96iSuk.jpg" alt=""></a>
+							<p style="font-size:20px; font-weight: bold;">IDENTIFICATION<br>文化可认同</p>
+						</section>
+	
+					</div>
+				</section>
+			</div>
+	 <h3 id="map1">NYC Commuting Types</h3>
+	 <div id="map"></div>
+	 <section class="container">
+	 <div class="buttons">
+            <button class="walking">Walking</button>
+            <button class="publicTransport">Public Transportation</button>
+			<button class="driving">Driving</button>
+			<button class="reset">reset</button>
+        </div>
+
+        <script>
+	        var commutingType;
+            $(document).ready(function () {
+                cartodb.createVis('map', 'https://thenewschool.carto.com/u/heming/api/v2/viz/2c78b56a-d19b-4d27-99b1-8e6ed6fdb81b/viz.json',
+                    {
+            cartodb_logo:false,
+	        layer_selector: true,
+	        zoom: 11,})
+                .done(function (vis, layers) {
+                        commutingType = layers[1].getSubLayer(0);
+                    });; 
+            
+                $('.walking').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage4 >= 25");
+                });
+                $('.publicTransport').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage3 >= 50");
+                });
+                $('.driving').click(function () {
+				commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage >= 50");
+				});
+				$('.reset').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc");
+				});
+            });
+        </script>
+        </section>
+
+        <!-- PDF -->
+        	<div id="maintext" >
+				<section class="container">
+        <h2 style="text-align: center; font-weight: bold;">Where is the gap?</h2>
+	         <a href="https://hemingz.github.io/heming.github.io/handout/handout-1-final-in.pdf" target="_blank">
+        <img id="pdfimg" src="http://i.imgur.com/7tk0bZ3.png" alt='Workshop'>
+	        </a>
+		        </section>
+			</div>
+		<!--<h2 style="text-align: center; font-weight: bold;">Where is the gap?</h2>
+		<object id="pdf", width="1200" height="810" data="WEBSITE-THESIS/handout-1-final-in.pdf"></object>-->
+
+        
+        <!-- Footer -->
+			<div id="footer">
+				<div class="container">
+						<div class="copyright">
+							Design: Heming Zhang;     Program: DUE (Parsons for The New School)<br><br>
+							<img src="http://i.imgur.com/3OM4irS.jpg">
+						</div>
+
+				</div>
+			</div>
+        </body>
+</html>
