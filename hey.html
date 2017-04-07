@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+        <!--
+            Load Carto's code so we can pull in our Carto maps.
+        -->
+        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+
+            #map {
+                height: 100%;
+                width: 100%;
+            }
+
+            .type-picker {
+                position: absolute;
+                top: 15px;
+                left: 55px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script type="template/html" id="popup-template">
+            <div class="cartodb-popup v2">
+                <a href="#close" class="cartodb-popup-close-button close">x</a>
+                <div class="cartodb-popup-content-wrapper">
+                    <div class="cartodb-popup-content">
+                         This is the route of a {{relation}}, whose age is {{age}}, for {{activities}}
+    
+    
+                    </div>
+                </div>
+                <div class="cartodb-popup-tip-container"></div>
+            </div>
+        </script>
+
+        <script type="template/html" id="popup-template2">
+            <div class="cartodb-popup v2">
+                <a href="#close" class="cartodb-popup-close-button close">x</a>
+                <div class="cartodb-popup-content-wrapper">
+                    <div class="cartodb-popup-content">
+                    
+    
+                    </div>
+                </div>
+                <div class="cartodb-popup-tip-container"></div>
+            </div>
+        </script>
+
+
+        <select class="type-picker">
+            
+             <option value="0">All the routes</option>
+             <option value="1">route of residents 1</option>
+             <option value="2">route of residents 2</option>
+             <option value="3">route of worker</option>
+             <option value="4">route of visitor 1</option>
+             <option value="5">route of visitor 1</option>
+
+         </select>
+
+        <script>
+            var mapLayer1;
+            var mapLayer2;
+          
+
+            $(document).ready(function () {
+                cartodb.createVis('map', 'https://thenewschool.carto.com/u/heming/api/v2/viz/3e3dbf68-1b49-11e7-bae5-0e98b61680bf/viz.json')
+                    .done(function (vis, layers) {
+                        mapLayer1 = layers[1].getSubLayer(0);
+                        mapLayer2 = layers[1].getSubLayer(1);
+
+                        mapLayer1.infowindow.set('sanitizeTemplate', false);
+                        mapLayer2.infowindow.set('sanitizeTemplate', false);
+                        mapLayer1.infowindow.set('template', $('#popup-template').html());
+                        mapLayer2.infowindow.set('template', $('#popup-template2').html());
+                
+                       
+                    });
+
+                     $('.type-picker').change(function () {
+                    var type = $('.type-picker').val();
+                    console.log(type);
+                    var sql;
+                    if (type === '1') {
+                        mapLayer1.setSQL("SELECT * FROM routes WHERE id = 1");
+                        mapLayer2.setSQL("SELECT * FROM oint WHERE id = 1");
+                    }
+                    
+                     else if (type === '2'){
+                        mapLayer1.setSQL("SELECT * FROM routes WHERE id = 2");
+                        mapLayer2.setSQL("SELECT * FROM oint WHERE id = 2");
+                    }
+                    else if (type === '3'){
+                        mapLayer1.setSQL("SELECT * FROM routes WHERE id = 3");
+                        mapLayer2.setSQL("SELECT * FROM oint WHERE id = 3");
+                    }
+
+                    else if (type === '4'){
+                        mapLayer1.setSQL("SELECT * FROM routes WHERE id = 4");
+                        mapLayer2.setSQL("SELECT * FROM oint WHERE id = 4");
+                    }
+
+                    else if (type === '5'){
+                        mapLayer1.setSQL("SELECT * FROM routes WHERE id = 5");
+                        mapLayer2.setSQL("SELECT * FROM oint WHERE id = 5");
+                    }
+
+                    else if (type === '0'){
+                        mapLayer1.setSQL("SELECT * FROM routes");
+                        mapLayer2.setSQL("SELECT * FROM oint ");
+                    }
+                    console.log(sql);
+
+                });
+            });
+        </script>
+        <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    </body>
+</html>
