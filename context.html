@@ -1,0 +1,585 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Heming Zhang</title>
+		<!--font-->
+		 <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+		 <!--jQuery-->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+
+		<style>
+/*basic*/
+		body, input, select, textarea {
+		color: #555555;
+		font-family: 'Myriad Pro', sans-serif;
+		font-size: 15pt;
+		font-weight: 300;
+		line-height: 1.75em;
+	}
+	p, ul, ol, dl, table, blockquote {
+		margin: 0 0 2em 0;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+		font-weight: 800;
+		line-height: 1.75em;
+		margin-bottom: 1em;
+	}
+	h1 {
+	font-size: 3em;
+	line-height: 2em;
+}
+
+	h2 {
+		font-size: 1.3em;
+		font-weight: normal;
+	}
+
+	h3 {
+		font-size: 1.25em;
+	}
+
+	sub {
+		font-size: 0.8em;
+		position: relative;
+		top: 0.5em;
+	}
+
+	sup {
+		font-size: 0.8em;
+		position: relative;
+		top: -0.5em;
+	}
+
+	hr {
+		border-top: solid 1px #888888;
+		border: 0;
+		margin-bottom: 1.5em;
+	}
+
+	blockquote {
+		border-left: solid 0.5em #888888;
+		font-style: italic;
+		padding: 1em 0 1em 2em;
+	}
+
+	section.special, article.special {
+		text-align: center;
+	}
+
+	header.major {
+		padding-bottom: 4em;
+	}
+
+	header h2 {
+		margin: 0;
+		padding: 0;
+		font-size: 2.5em;
+		font-weight: 600;
+	}
+
+	header .byline {
+		font-size: 30px; 
+		font-weight: bold;"
+	}
+
+	footer > :last-child {
+		margin-bottom: 0;
+	}
+
+	footer.major {
+		padding-top: 3em;
+	}
+
+
+	}
+
+	/* container*/
+
+	.container em
+	{
+		text-align: center;
+		color: 200;
+	}
+	/* Image */
+
+	.image {
+		border: 0;
+		white-space: nowrap;
+	}
+
+		.image.fit {
+			display: block;
+		}
+
+			.image.fit img {
+				display: inline;
+				width: 60%;
+			}
+
+		.image.feature {
+			display: inline;
+			position: 50%;
+		}
+
+			.image.feature img {
+				text-align: center;
+				display: inline;
+				width: 37%;
+			}
+			.subimage
+			{
+				white-space: nowrap;
+				display: inline-block;
+			}
+
+
+		#contextimg
+		{
+		height: 10 0%;
+		background-color: 255;
+		text-align: center;
+
+
+		}
+
+			/* Wrapper */
+
+	.wrapper.style1 {
+		background: #ffffff;
+	}
+
+	.wrapper.style2 {
+		background: #ffffff;
+		padding: 2em 0;
+		text-align: center;
+	}
+
+	.wrapper.style3 {
+		padding: 2em 0 3.5em 0;
+		background: #ffffff;
+	}
+
+		.wrapper.style3 span {
+			display: inline-block;
+			padding-top: 0.80em;
+			font-size: 2em;
+			font-weight: 600;
+		}
+
+		.wrapper.style3 .button {
+			float: right;
+		}
+
+/* Header */
+
+	#header {
+		background: #333333 url("http://i.imgur.com/UgKmfyH.jpg") no-repeat;
+		background-size: cover;
+		color: #fff;
+		padding: 6em 0;
+		text-align: center;
+		background-position: 0% 65%;
+		position: relative;
+	}
+
+		
+		#header > * {
+			position: relative;
+			z-index: 1;
+		}
+
+	.homepage #header {
+		padding: 1em 0;
+		background-position: center;
+	}
+
+	#logo {
+		padding-top: 0.4em;
+		font-size: 2.8em;
+		font-weight: 700;
+		color: rgb(247, 247, 247);
+		line-height: 1.2em;
+		position: relative;
+	}
+
+	#nav > ul {
+		margin: 0;
+	}
+
+		#nav > ul > li {
+			border-radius: 10px 10px 0 0;
+			display: inline-block;
+			margin-left: 0.5em;
+			padding: 0.5em 1.5em;
+		}
+
+			#nav > ul > li a {
+				color: #FFF;
+				text-decoration: none;
+				font-size: 1.2em;
+			}
+
+			#nav > ul > li:first-child {
+				margin-left: 0;
+			}
+
+			#nav > ul > li:hover a {
+				color: #fff;
+			}
+
+			#nav > ul > li.active {
+				background: #3ac984;maintext
+			}
+
+				#nav > ul > li.active a {
+					color: white;
+				}
+
+			#nav > ul > li > ul {
+				display: none;
+			}
+
+/* Main */
+
+	.no-sidebar #main .major, .left-sidebar #main .major, .right-sidebar #main .major {
+		text-align: left;
+	}
+
+	.homepage #main .major {
+		text-align: center;
+	}
+
+	#main {
+		padding: 6em 0;
+	}
+
+		#main .sidebar .major {
+			padding-bottom: 2em;
+		}
+
+			#main .sidebar .major h2 {
+				font-size: 1.8em;
+			}
+
+		#main .sidebar .default li {
+			border-color: #cdcdcd;
+		}
+
+		#main .sidebar .default a {
+			color: #464646;
+		}
+
+		#main .sidebar > :first-child {
+			margin-bottom: 3em;
+		}
+
+			#maintext {
+			padding-top: 1em;
+			padding-left:14em;
+			padding-right:14em;
+			font-size: 15px;
+			line-height: 1.5em;
+			word-spacing: 0.7px;
+			background: #fff;
+			text-align: justify;
+		}
+
+		#textS
+		{
+			text-decoration-color: #f49b42;
+		}
+		/* Footer */
+
+	#footer {
+		padding: 1em 0;
+		font-weight: 20;
+		color: #2a2c30;
+	}
+
+		#footer .major h2 {
+			font-size: 2em;
+			color: #fff;
+		}
+
+		#footer .major .byline {
+			font-size: 1.1em;
+		}
+
+		#footer .copyright {
+			padding-top: 2em;
+			border-top: 1px solid;
+			font-weight: bold;
+			border-color: rgba(192, 192, 192, 0.15);
+			text-align: center;
+			color: inherit;
+		}
+
+		#footer a {
+			color: inherit;
+		}
+
+		html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+            
+			#map1 {
+				text-align: center;
+				background: #ffffff;
+			}
+            #map {
+            	background: #ffffff;
+            	padding-left:8em;
+            
+            	padding-right: 8em;
+	   			padding-bottom: 2em;
+                height: 80%;
+                width: 80%;
+
+            }
+
+            #map2{
+
+            	background: #ffffff;
+            	text-align: center;
+            	padding-left:6.3em;
+            	padding-right:5em;
+                height: 80%;
+                width: 80%;
+            }
+
+            .buttons {
+                position: absolute;
+                top: 1905px;
+                left: 480px;
+            }
+
+            
+            #pdf{
+			padding-left:2em;
+			padding-right:2em;
+			padding-top: 2em;
+			padding-bottom: 1em;
+            }
+
+            #pdfimg{
+            	background: #ffffff;
+            	width: 100%;
+            	height: 100%;
+            }
+
+            #linkText{
+
+            }
+        </style>
+
+        <!--link rel="stylesheet" href="ASSN7/style.css" /-->
+	</head>
+
+<body>
+</head>
+	<body class="homepage">
+
+		<!-- Header -->
+			<div id="header">
+				<div class="container">
+						
+					<!-- Logo -->
+						<h1 id="logo">Chinatown Rethinks<br>Walkable Neighborhoods
+						<br>由中国城开始反思步行社区的定义
+						</h1>
+					
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li>Home • 首页</a></li>
+								<li>Context • 背景</a>
+								</li>
+								<li>Insights • 观点</a></li>
+								<li>Strategy • 策略</a></li>
+								<li>Toolkit • 应用</a></li>
+							
+							</ul>
+						</nav>
+						
+				</div>
+			</div>
+	<div id="maintext" >
+				<section class="container">
+				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; font-color:#402f66;">
+					Why do we have to redefine "walkable neighborhoods"?
+				</p>
+				<h2>
+					1. Walkable Neighborhoods & Gentrification
+				</h2>
+			<p>
+				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
+			</p>
+			<p>
+				If we carefully compare the conclusion from Foot Traffic Ahead 2016 and the situation of Chinatown, there is an obvious conflict here. The major communities in Chinatown are neither wealthy nor highly educated. In opposite, it is a low-income, immigrants neighborhood which contains large senior population in the context of gentrification. Chinatown is providing unique and affordable products and services for local resident and immigrants from all over the city. Also, the analysis of data in this report is mainly based on the outcome of <a href="https://www.walkscore.com/NY/New_York"  target="_blank" id="linkText">Walk Score</a>, which is a private company that assigns walkability scores to any address in the United States and provides ranks of walkable cities and neighborhoods. <strong>Walk Score ranks New York City as the most walkable city in America and Chinatown as the 3rd most walkable neighborhood in New York. </strong>Due to its historical and cultural causes, Chinatown has compact neighborhoods pattern and high residential and commercial densities, which helps this neighborhood getting excellent performance on walkability index, if only take quantitative analysis into account. According to the research of The Pedestrian Pound, <strong>however, each point increase in Walk Score will lead to greater than 328% increase of property values.</strong> It's hard to say whether the gentrification in Chinatown is mainly due to Walk Score, but we do see some real estate developers are using the concept of "walkable neighborhood" in their advertisement. 
+ 
+
+			</p>
+
+				</section>
+				
+	</div>
+	<div id="contextimg">
+		<img  style="width:60%;height:60%;" src="http://i.imgur.com/E1mtcsa.jpg"></img>
+	</div>
+
+<div id="maintext" >
+				<section class="container">
+			<h2>
+					2. Walkable Neighborhoods & Poor Conditions
+			</h2>
+			<p>Besides walking distance and neighborhoods pattern, if we take a close look at the other measurements of walkability such as physical walking environment and pedestrian volume, it is difficult to draw a single conclusion whether Chinatown is a walkable neighborhood. Suffering from narrow streets, uneven sidewalks and air pollutions, the streets in Chinatown are considered as blight and broken by many exports.
+			</p>
+			</section>
+				
+	</div>
+
+
+			<div class="wrapper style2">
+				<section class="container">
+					<div class="subimage">
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/6zLnFQ4.jpg" alt=""></a>
+						</section>
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/tvOy5Py.jpg" alt=""></a>
+						</section>
+						
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/JSFLf6V.jpg" alt=""></a>
+						</section>
+	
+					</div>
+				</section>
+			</div>
+
+		<div id="maintext" >
+				<section class="container">
+				<h2>
+					3. Walkable Neighborhoods & Lacking Public Participation
+				</h2>
+			<p>
+			In the name of building "better walking environment for pedestrians" and promoting "quality of life", several design proposals equip the idea of place-making to address the physical issues. A currently example is the study on <a href="http://www.nyc.gov/html/mancb3/downloads/fellowship/Chinatown%20Pedestrian%20Circulation%20Study.pdf"  target="_blank">Chinatown pedestrian circulation</a> from Community Board 3 in 2016. In this study, the researcher identified several challenges and opportunities for improving pedestrian circulation only on East Broadway (even CB3 called this research as "Chinatown" Pedestrian Circulation Study) and developed some strategies and design proposals such as "install painted curb extensions", "increase access to bicycle parking", and "investigate potential intercity bus stop violations" for promoting walking environment in Chinatown by using non-participant observation method. There is one statement in the study actually point out the issue that <strong>"If possible, conduct interviews with local business owners and residents to determine their thoughts and suggestions for improving pedestrian circulation and challenges to pedestrian movement on East Broadway.</strong>" The researcher, who is not from Asian background, is the outsider of the Chinese community, and he used standard design guidebook and case studies from other American neighborhoods to identify the problems here and develop his insights for Chinatown without listening to the voice of local communities. 
+
+
+			</p>
+			</section>
+		</div>
+
+		<div id="contextimg">
+		<img  style="width:55%;height:55%;" src="http://i.imgur.com/k6wt1aB.png"></img>
+		</div>
+
+		<div id="maintext" >
+				<section class="container">
+				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; line-height: 40px;">
+				How can we unpack the meaning of "walkable neighborhoods" to the communities in Chinatown and let their voice be heard?
+				</p>
+			<p>
+				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
+			</p>
+
+				</section>
+				
+	</div>
+
+<!--map1-->
+
+	 <h3 id="map1">NYC Commuting Types</h3>
+	 <div id="maintext" >
+				<section class="container">
+			<p>
+			According to the data from <a href="https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t#acsST"  target="_blank">American Community Survey</a>, the map bellow shows the commuting types to work in 2014. Comparing among three main categories of commuting types, you can figure out which neighborhoods have more people <span class="walking" style="text-decoration: underline;">walk to work (>= 25%)</span>, which neighborhoods have more people take <span class="publicTransport" style="text-decoration: underline;">public transportation to work (>= 50%)</span>, and which neighborhoods have more people <span class="driving" style="text-decoration: underline;">drive to work (>= 50%)</span>.<br><em>(Please click the underlined text to filter map data. You can <span class="reset" style="text-decoration: underline;">reset map by clicking here)</span></em></p>
+			</section>
+		</div>
+	 <div id="map"></div>
+	 <section class="container">
+
+
+
+        <script>
+	        var commutingType;
+            $(document).ready(function () {
+                cartodb.createVis('map', 'https://thenewschool.carto.com/u/heming/api/v2/viz/2c78b56a-d19b-4d27-99b1-8e6ed6fdb81b/viz.json',
+                    {
+            cartodb_logo:false,
+	        layer_selector: true,
+	        zoom: 11,})
+                .done(function (vis, layers) {
+                        commutingType = layers[1].getSubLayer(0);
+                    });; 
+            
+                $('.walking').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage4 >= 25");
+                });
+                $('.publicTransport').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage3 >= 50");
+                });
+                $('.driving').click(function () {
+				commutingType.setSQL("SELECT * FROM commuting_types_in_nyc WHERE percentage >= 50");
+				});
+				$('.reset').click(function () {
+                    commutingType.setSQL("SELECT * FROM commuting_types_in_nyc");
+				});
+            });
+        </script>
+        </section>
+
+ <!--map2-->
+<h3 id="map2">Chinatown deographic data</h3>
+	  <div id="map2"></div>
+	 <section class="container">
+        <script type="template/html" id="popup-template">
+            <div class="cartodb-popup v2">
+                <a href="#close" class="cartodb-popup-close-button close">x</a>
+                <div class="cartodb-popup-content-wrapper">
+                    <div class="cartodb-popup-content">
+                      The median household income range is {{midean_h_1}}
+                    </div>
+                </div>
+                <div class="cartodb-popup-tip-container"></div>
+            </div>
+        </script>
+
+		 <script>
+	        var demographic;
+            $(document).ready(function () {
+                cartodb.createVis('map2', 'https://thenewschool.carto.com/u/heming/api/v2/viz/854da1dc-1f29-11e7-a9e2-0ee66e2c9693/viz.json',
+                    {
+            cartodb_logo:false,
+	        layer_selector: true,
+	        zoom: 13,})
+                .done(function (vis, layers) {
+                        demographic = layers[1].getSubLayer(1);
+                        demographic.infowindow.set('sanitizeTemplate', false);
+                        demographic.infowindow.set('template', $('#popup-template').html());
+                    });; 
+            
+               
+            });
+        </script>
+       
+      
+        <!-- Footer -->
+			<div id="footer">
+				<div class="container">
+						<div class="copyright">
+							Design: Heming Zhang;     Program: DUE (Parsons for The New School)<br><br>
+							<img src="http://i.imgur.com/3OM4irS.jpg">
+						</div>
+
+				</div>
+			</div>
+        </body>
+</html>
