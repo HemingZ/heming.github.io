@@ -1,0 +1,947 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Heming Zhang</title>
+		<!--font-->
+		 <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+		 <!--jQuery-->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+/*basic*/
+		body, input, select, textarea {
+		color: #555555;
+		font-family: 'Myriad Pro', sans-serif;
+		font-size: 15pt;
+		font-weight: 300;
+		line-height: 1.75em;
+	}
+	p, ul, ol, dl, table, blockquote {
+		margin: 0 0 2em 0;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+		font-weight: 800;
+		line-height: 1.75em;
+		margin-bottom: 1em;
+	}
+	h1 {
+	font-size: 3em;
+	line-height: 2em;
+}
+
+	h2 {
+		font-size: 1.3em;
+		font-weight: normal;
+	}
+
+	h3 {
+		font-size: 1.25em;
+	}
+
+	sub {
+		font-size: 0.8em;
+		position: relative;
+		top: 0.5em;
+	}
+
+	sup {
+		font-size: 0.8em;
+		position: relative;
+		top: -0.5em;
+	}
+
+	hr {
+		border-top: solid 1px #888888;
+		border: 0;
+		margin-bottom: 1.5em;
+	}
+
+	blockquote {
+		border-left: solid 0.5em #888888;
+		font-style: italic;
+		padding: 1em 0 1em 2em;
+	}
+
+	section.special, article.special {
+		text-align: center;
+	}
+
+	header.major {
+		padding-bottom: 4em;
+	}
+
+	header h2 {
+		margin: 0;
+		padding: 0;
+		font-size: 2.5em;
+		font-weight: 600;
+	}
+
+	header .byline {
+		font-size: 30px; 
+		font-weight: bold;"
+	}
+
+	footer > :last-child {
+		margin-bottom: 0;
+	}
+
+	footer.major {
+		padding-top: 3em;
+	}
+
+
+	}
+
+	/* container*/
+
+	.container em
+	{
+		text-align: center;
+		color: 200;
+	}
+	/* Image */
+
+	.image {
+		border: 0;
+		white-space: nowrap;
+	}
+		.image.fit {
+			display: block;
+		}
+
+			.image.fit img {
+				display: inline;
+				width: 60%;
+			}
+
+		.image.feature {
+			display: inline;
+			position: 50%;
+		}
+
+			.image.feature img {
+				text-align: center;
+				display: inline;
+				width: 67%;
+			}
+			.subimage
+			{
+				white-space: nowrap;
+				display: inline-block;
+			}
+
+
+		#contextimg
+		{
+		height: 10 0%;
+		background-color: 255;
+		text-align: center;
+
+
+		}
+
+			/* Wrapper */
+
+	.wrapper.style1 {
+		background: #ffffff;
+	}
+
+	.wrapper.style2 {
+		background: #ffffff;
+		padding: 2em 0;
+		text-align: center;
+	}
+	.wrapper.style3 {
+		background: #ffffff;
+		
+		text-align: center;
+	}
+
+
+		.wrapper > .inner {
+			margin: 0 auto;
+			width: 60em;
+		}
+
+/* Feature */
+
+	.feature {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-align-items: center;
+		-webkit-align-items: center;
+		-ms-align-items: center;
+		align-items: center;
+		margin-bottom: 6em;
+	}
+
+	
+
+		.feature.left {
+			-moz-flex-direction: row;
+			-webkit-flex-direction: row;
+			-ms-flex-direction: row;
+			flex-direction: row;
+		}
+
+		.feature.right {
+			-moz-flex-direction: row-reverse;
+			-webkit-flex-direction: row-reverse;
+			-ms-flex-direction: row-reverse;
+			flex-direction: row-reverse;
+		}
+
+		.feature .image {
+			width: 48%;
+		}
+
+			.feature .image img {
+				max-width: 100%;
+			}
+
+		.feature .content {
+			padding: 2em 3em 0.1em 1em;
+			width: 52%;
+		}
+
+		@media screen and (max-width: 1280px) {
+
+			.feature {
+				margin-bottom: 2em;
+			}
+
+				.feature .content {
+					padding: 0em 0em 0em 2em;
+				}
+
+		}
+
+		@media screen and (max-width: 980px) {
+
+			.feature.left, .feature.right {
+				-moz-flex-direction: column;
+				-webkit-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+			}
+
+			.feature .image {
+				width: 100%;
+			}
+
+				.feature .image img {
+					width: 100%;
+				}
+
+			.feature .content {
+				padding: 2em 2em 0.1em 2em;
+				width: 100%;
+			}
+
+		}
+
+		@media screen and (max-width: 736px) {
+
+			.feature {
+				margin-bottom: 2em;
+			}
+
+				.feature .content {
+					padding: 2em 1em 0.1em 1em;
+				}
+
+		}
+
+	.feature {
+		background-color: rgba(144, 144, 144, 0.075);
+	}
+
+/* Button */
+
+	input[type="button"],
+	button,
+	.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		border-radius: 2.5em;
+		border: 0;
+		cursor: pointer;
+		display: inline-block;
+		font-weight: 700;
+		height: 2.85em;
+		line-height: 2.95em;
+		min-width: 10em;
+		padding: 0 1.5em;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+		input[type="button"].icon,
+		button.icon,
+		.button.icon {
+			padding-left: 1.35em;
+		}
+
+			input[type="button"].icon:before,
+			button.icon:before,
+			.button.icon:before {
+				margin-right: 0.5em;
+			}
+
+		input[type="button"].fit,
+		button.fit,
+		.button.fit {
+			display: block;
+			margin: 0 0 1em 0;
+			width: 100%;
+		}
+
+		input[type="button"].small,
+		button.small,
+		.button.small {
+			font-size: 0.8em;
+		}
+
+		input[type="button"].big,
+		button.big,
+		.button.big {
+			font-size: 1.2em;
+			height: 3.25em;
+			line-height: 3.25em;
+			padding: 0 2.5em;
+		}
+
+		input[type="button"].disabled,
+		input[type="button"]:disabled,
+		button.disabled,
+		button:disabled,
+		.button.disabled,
+		.button:disabled {
+			cursor: default;
+			opacity: 0.25;
+		}
+
+		@media screen and (max-width: 980px) {
+
+
+			input[type="button"].big,
+			button.big,
+			.button.big {
+				font-size: 1em;
+			}
+
+		}
+
+		@media screen and (max-width: 480px) {
+
+
+			input[type="button"],
+			button,
+			.button {
+				padding: 0;
+			}
+
+		}
+
+
+	input[type="button"],
+	button,
+	.button {
+		background-color: #9b8f6f;
+		box-shadow: none;
+		color: #fff !important;
+	}
+
+		input[type="button"].icon:before,
+		button.icon:before,
+		.button.icon:before {
+			color: #999;
+		}
+
+		input[type="button"]:hover,
+		button:hover,
+		.button:hover {
+			background-color: #9b8f6f;
+		}
+
+		input[type="button"]:active,
+		button:active,
+		.button:active {
+			background-color: #9b8f6f;
+		}
+
+		input[type="button"].special,
+		button.special,
+		.button.special {
+			background-color: #9b8f6f;
+			box-shadow: none;
+			color: #fff !important;
+		}
+
+			input[type="button"].special:hover,
+			button.special:hover,
+			.button.special:hover {
+				background-color: #9b8f6f;
+			}
+
+			input[type="button"].special:active,
+			button.special:active,
+			.button.special:active {
+				background-color: #9b8f6f;
+			}
+
+			input[type="button"].alt,
+			button.alt,
+			.button.alt {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 2px #9b8f6f;
+			color: #9b8f6f !important;
+		}
+
+			input[type="button"].alt:hover,
+			button.alt:hover,
+			.button.alt:hover {
+				background-color: rgba(144, 144, 144, 0.075);
+			}
+
+			input[type="button"].alt:active,
+			button.alt:active,
+			.button.alt:active {
+				background-color: rgba(144, 144, 144, 0.2);
+			}
+
+
+/* Header */
+
+	#header {
+		background: #333333 url("http://i.imgur.com/UgKmfyH.jpg") no-repeat;
+		background-size: cover;
+		color: #fff;
+		padding: 6em 0;
+		text-align: center;
+		background-position: 0% 65%;
+		position: relative;
+	}
+
+		
+		#header > * {
+			position: relative;
+			z-index: 1;
+		}
+
+	.homepage #header {
+		padding: 1em 0;
+		background-position: center;
+	}
+
+	#logo {
+		padding-top: 0.4em;
+		font-size: 2.8em;
+		font-weight: 700;
+		color: rgb(247, 247, 247);
+		line-height: 1.2em;
+		position: relative;
+	}
+
+	#nav > ul {
+		margin: 0;
+	}
+
+		#nav > ul > li {
+			border-radius: 10px 10px 0 0;
+			display: inline-block;
+			margin-left: 0.5em;
+			padding: 0.5em 1.5em;
+		}
+
+			#nav > ul > li a {
+				color: #FFF;
+				text-decoration: none;
+				font-size: 1.2em;
+			}
+
+			#nav > ul > li:first-child {
+				margin-left: 0;
+			}
+
+			#nav > ul > li:hover a {
+				color: #fff;
+			}
+
+			#nav > ul > li.active {
+				background: #3ac984;maintext
+			}
+
+				#nav > ul > li.active a {
+					color: white;
+				}
+
+			#nav > ul > li > ul {
+				display: none;
+			}
+
+/* Main */
+
+	.no-sidebar #main .major, .left-sidebar #main .major, .right-sidebar #main .major {
+		text-align: left;
+	}
+
+	.homepage #main .major {
+		text-align: center;
+	}
+
+	#main {
+		padding: 6em 0;
+	}
+
+		#main .sidebar .major {
+			padding-bottom: 2em;
+		}
+
+			#main .sidebar .major h2 {
+				font-size: 1.8em;
+			}
+
+		#main .sidebar .default li {
+			border-color: #cdcdcd;
+		}
+
+		#main .sidebar .default a {
+			color: #464646;
+		}
+
+		#main .sidebar > :first-child {
+			margin-bottom: 3em;
+		}
+
+			#maintext {
+			padding-top: 1em;
+			padding-left:14em;
+			padding-right:14em;
+			font-size: 15px;
+			line-height: 1.5em;
+			word-spacing: 0.7px;
+			background: #fff;
+			text-align: justify;
+		}
+
+		#textS
+		{
+			text-decoration-color: #f49b42;
+		}
+		/* Footer */
+
+	#footer {
+		padding: 1em 0;
+		font-weight: 20;
+		color: #2a2c30;
+	}
+
+		#footer .major h2 {
+			font-size: 2em;
+			color: #fff;
+		}
+
+		#footer .major .byline {
+			font-size: 1.1em;
+		}
+
+		#footer .copyright {
+			padding-top: 2em;
+			border-top: 1px solid;
+			font-weight: bold;
+			border-color: rgba(192, 192, 192, 0.15);
+			text-align: center;
+			color: inherit;
+		}
+
+		#footer a {
+			color: inherit;
+		}
+
+		html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+            }
+            
+
+            .buttons {
+                position: absolute;
+                top: 1905px;
+                left: 480px;
+            }
+
+            
+            #pdf{
+			padding-left:2em;
+			padding-right:2em;
+			padding-top: 2em;
+			padding-bottom: 1em;
+            }
+
+            #pdfimg{
+            	background: #ffffff;
+            	width: 100%;
+            	height: 100%;
+            }
+/* Gallery */
+
+	@-moz-keyframes gallery {
+		100% {
+			opacity: 1;		}
+	}
+
+	@-webkit-keyframes gallery {
+		100% {
+			opacity: 1;		}
+	}
+
+	@-ms-keyframes gallery {
+		100% {
+			opacity: 1;		}
+	}
+
+	@keyframes gallery {
+		100% {
+			opacity: 1;		}
+	}
+
+	.gallery {
+		padding: 3.5em;
+		position: relative;
+		overflow: hidden;
+		min-height: 20em;
+	}
+
+		@media screen and (max-width: 980px) {
+
+			.gallery {
+				padding: 2em;
+				min-height: 20em;
+			}
+
+				.gallery header h2 {
+					margin-bottom: 1em;
+				}
+
+		}
+
+		@media screen and (max-width: 480px) {
+
+			.gallery {
+				padding: 1em;
+			}
+
+		}
+
+		.gallery header {
+			display: -ms-flexbox;
+			-ms-flex-pack: justify;
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-wrap: wrap;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-moz-justify-content: space-between;
+			-webkit-justify-content: space-between;
+			-ms-justify-content: space-between;
+			justify-content: space-between;
+		}
+
+			.gallery header.special {
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.gallery header {
+					display: block;
+				}
+
+			}
+
+			@media screen and (max-width: 480px) {
+
+				.gallery header h2 {
+					margin-bottom: .5em;
+				}
+
+			}
+
+		.gallery .content {
+			display: -ms-flexbox;
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-wrap: wrap;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-moz-justify-content: -moz-flex-start;
+			-webkit-justify-content: -webkit-flex-start;
+			-ms-justify-content: -ms-flex-start;
+			justify-content: flex-start;
+		}
+
+			.gallery .content .media {
+				-moz-animation: gallery 0.75s ease-out 0.4s forwards;
+				-webkit-animation: gallery 0.75s ease-out 0.4s forwards;
+				-ms-animation: gallery 0.75s ease-out 0.4s forwards;
+				animation: gallery 0.75s ease-out 0.4s forwards;
+				margin-bottom: 0;
+				overflow: hidden;
+				opacity: 0;
+				position: relative;
+				width: 25%;
+			}
+
+				.gallery .content .media a {
+					display: block;
+				}
+
+				.gallery .content .media img {
+					-moz-transition: -moz-transform 0.2s ease-in-out;
+					-webkit-transition: -webkit-transform 0.2s ease-in-out;
+					-ms-transition: -ms-transform 0.2s ease-in-out;
+					transition: transform 0.2s ease-in-out;
+					max-width: 100%;
+					height: 220px;
+					vertical-align: middle;
+				}
+
+				.gallery .content .media:hover img {
+					-moz-transform: scale(1.075);
+					-webkit-transform: scale(1.075);
+					-ms-transform: scale(1.075);
+					transform: scale(1.075);
+				}
+
+				@media screen and (max-width: 736px) {
+
+					.gallery .content .media {
+						width: 50%;
+					}
+
+				}
+
+				@media screen and (max-width: 480px) {
+
+					.gallery .content .media {
+						width: 100%;
+					}
+
+				}
+
+		#video{
+			text-align: center;
+			padding-bottom: 2em;
+		}
+
+        </style>
+
+        <!--link rel="stylesheet" href="ASSN7/style.css" /-->
+	</head>
+
+<body>
+</head>
+	<body class="homepage">
+
+		<!-- Header -->
+			<div id="header">
+				<div class="container">
+						
+					<!-- Logo -->
+						<h1 id="logo">Chinatown Rethinks<br>Walkable Neighborhoods
+						<br>由中国城开始反思步行社区的定义
+						</h1>
+					
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li>Home • 首页</a></li>
+								<li><a href="https://hemingz.github.io/heming.github.io/context.html">Context • 背景</a>
+								<li>Insights • 观点</a></li>
+								<li>Strategy • 策略</a></li>
+								<li>Toolkit • 应用</a></li>
+							
+							</ul>
+						</nav>
+						
+				</div>
+			</div>
+	<!--start-->
+	<div id="maintext" >
+				<section class="container">
+				<p style="padding-top:30px; font-size: 30px; font-style: italic; text-align: center; font-weight: 700; color: #9b8f6f;">
+					Which one do you think is the more walkable Chinatown?
+				</p>
+				</section>
+	</div>
+
+	<!-- Featured -->
+			<div class="wrapper style3">
+				<section class="container">
+						</section>
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/GpeRKlO.jpg" alt=""></a>
+							<p style="font-size:20px;">Portland Chinatown</p>
+						</section>
+						<section class="4u">
+							<a href="#" class="image feature"><img src="http://i.imgur.com/yPjSq5w.jpg" alt=""></a>
+							<p style="font-size:20px;">New York Chinatown</p>
+						</section>
+	
+					</div>
+				</section>
+			</div>
+
+			<div id="maintext" >
+				<section class="container">
+			<p>
+				In light of various scenarios of physical, mental and social benefits, building walkable neighborhoods, as a "thriving industry", is receiving huge attentions from researchers, decision-makers and the wider public. There is no doubt that many positive impacts that can result from walkable environment. However, what does walkable neighborhood look like for local communities? How walkable neighborhoods influence people's living habits, cultural cohesion, and social capital. These questions are vital because they matter for both policy-making and physical design processes. While the general physical and environmental impacts of walkable neighborhoods are being broadly studied by using numerous quantitative methodologies, the social impacts on specific neighborhoods have not been detailed analyzed. The result of that leads to city-wide homogenous policies and similar design guides, which ignore the characteristics of different neighborhoods and even make some communities become more vulnerable when they are facing dramatically threatens of gentrification. 
+			</p>
+			</section>
+	</div>
+
+	<!--background-->
+	<div id="maintext" >
+				<section class="container">
+				<p style="padding-top:30px; font-size: 30px; font-style: italic; text-align: center; font-weight: 700; color: #9b8f6f;">
+					About this project
+				</p>
+			
+	<!--video-->
+				<div id="video">
+				<iframe src="https://player.vimeo.com/video/213070336?color=ffffff&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>
+
+			<p>
+				My project proposes a public scenarios collecting toolkit, which encourages and helps researchers and decision-makers to interact with local communities and have better understandings of the situation, to engage actively public participation while designing the versions of walkable neighborhood with immigrant neighborhoods. I used Chinatown, which is a low-income immigrant neighborhood and ranked as the third most walkable neighborhood in New York City by Walk Score, as my research site to develop and practice my toolkit. Due to its historical and cultural causes, Chinatown has compact neighborhoods pattern and high residential and commercial densities, which helps this neighborhood getting excellent performance on walkability, if only take quantitative analysis into account. However, it is also facing dramatically changes and suffering from poor physical conditions for many years. My toolkit doesn't try to assess whether Chinatown is walkable, but it unpacks how local communities understand "walkable neighborhoods" in terms of affordability, cultural identity and social capital. 
+
+			</p>
+				</section>
+	</div>
+
+			
+
+			<!-- content -->
+			<section id="one" class="style1">
+				<div class="inner">
+				<section class="container">
+				<p style="padding-top:30px; font-size: 30px; font-style: italic; text-align: center; font-weight: 700; color: #9b8f6f;">
+					What you can get from here...
+				</p>
+					<article class="feature left">
+						<span class="image"><img src="http://i.imgur.com/q96iSuk.jpg" alt="" /></span>
+						<div class="content">
+							<h2>Why do we need to redifine "walkable neighborhoods"?</h2>
+							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify;">Why does it matter to the communities in Chinatown? What are the issues inside the traditional research? In this section, you will learn the situation in Chinatown, and the issues within the research and desicion-making process of measuring and promoting walkable neighborhoods.</p>
+							<ul class="actions">
+								<li>
+									<a href="https://hemingz.github.io/heming.github.io/context.html" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature right">
+						<span class="image"><img src="http://i.imgur.com/kkL38sh.jpg" alt="" /></span>
+						<div class="content">
+							<h2>A new model for redefine "walkable neighborhood"</h2>
+							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify; text-decoration: italic;">How to engage public participation in the process of defining "walkable neighborhoods" in the low-income Chinese immigrant communities? What are the values they precious in the street activities and how those activities influence their route preference and emotions? To answer these questions, I developed a innovational model by using storytelling methods and tools to expose the meaning of "walkable Chinatown" through communities' eyes. </p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature left">
+						<span class="image"><img src="http://i.imgur.com/xnPmAUz.jpg" alt="" /></span>
+						<div class="content">
+							<h2>Toolkit: open the discussion in Chinatown</h2>
+							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify;">.</p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<!-- Gallery -->
+			<section id="galleries">
+
+				<!-- Photo Galleries -->
+					<div class="gallery">
+
+
+							<div class="content">
+								<div class="media all people">
+									<a href="http://i.imgur.com/cappQ03.jpg"><img src="http://i.imgur.com/cappQ03.jpg" alt=""/></a>
+								</div>
+								<div class="media all place">
+									<a href="http://i.imgur.com/NICVn6e.jpg"><img src="http://i.imgur.com/NICVn6e.jpg" alt=""  /></a>
+								</div>
+								<div class="media all thing">
+									<a href="http://i.imgur.com/gsVUUFi.jpg"><img src="http://i.imgur.com/gsVUUFi.jpg" alt="" /></a>
+								</div>
+								<div class="media all people">
+									<a href="http://i.imgur.com/LssGzbZ.jpg"><img src="http://i.imgur.com/LssGzbZ.jpg" alt="" title="This right here is a caption." /></a>
+								</div>
+								<div class="media all place">
+									<a href="http://i.imgur.com/JLwflgv.jpg"><img src="http://i.imgur.com/JLwflgv.jpg" alt="" title="This right here is a caption." /></a>
+								</div>
+								<div class="media all thing">
+									<a href="http://i.imgur.com/V7FS0g6.jpg"><img src="http://i.imgur.com/V7FS0g6.jpg" alt="" title="This right here is a caption." /></a>
+								</div>
+								<div class="media all people">
+									<a href="http://i.imgur.com/u8K5IvG.jpg"><img src="http://i.imgur.com/u8K5IvG.jpg" alt="" title="This right here is a caption." /></a>
+								</div>
+								<div class="media all place">
+									<a href="http://i.imgur.com/SfmENXr.jpg"><img src="http://i.imgur.com/SfmENXr.jpg" alt="" title="This right here is a caption." /></a>
+								</div>
+							
+								</div>
+							</div>
+					</div>
+			</section>
+
+
+        <!-- Footer -->
+			<div id="footer">
+				<div class="container">
+						<div class="copyright">
+							Design: Heming Zhang;     Program: DUE (Parsons for The New School)<br><br>
+							<img src="http://i.imgur.com/3OM4irS.jpg">
+						</div>
+
+				</div>
+			</div>
+        </body>
+</html>
