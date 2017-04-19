@@ -16,10 +16,21 @@
 		font-family: 'Myriad Pro', sans-serif;
 		font-size: 15pt;
 		font-weight: 300;
-		line-height: 1.75em;
+		line-height: 1.75em;}
+
+	a {
+		color: #8bc1bf;
 	}
+
 	p, ul, ol, dl, table, blockquote {
 		margin: 0 0 2em 0;
+		list-style: none;
+	}
+
+	ul.subimage
+	{
+		list-style: none;
+		display: inline-block;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -135,7 +146,7 @@
 			.image.feature img {
 				text-align: center;
 				display: inline;
-				width: 37%;
+				width: 22%;
 			}
 			.subimage
 			{
@@ -299,6 +310,228 @@
 		{
 			text-decoration-color: #f49b42;
 		}
+
+
+		/* Feature */
+
+	.feature {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-align-items: center;
+		-webkit-align-items: center;
+		-ms-align-items: center;
+		align-items: center;
+		margin-bottom: 6em;
+	}
+
+	
+
+		.feature.left {
+			-moz-flex-direction: row;
+			-webkit-flex-direction: row;
+			-ms-flex-direction: row;
+			flex-direction: row;
+		}
+
+		.feature.right {
+			-moz-flex-direction: row-reverse;
+			-webkit-flex-direction: row-reverse;
+			-ms-flex-direction: row-reverse;
+			flex-direction: row-reverse;
+		}
+
+		.feature .image {
+			width: 48%;
+		}
+
+			.feature .image img {
+				max-width: 100%;
+			}
+
+		.feature .content {
+			padding: 0em 3em 0.1em 1em;
+			width: 52%;
+		}
+
+		@media screen and (max-width: 1280px) {
+
+			.feature {
+				margin-bottom: 2em;
+			}
+
+				.feature .content {
+					padding: 0em 0em 0em 2em;
+				}
+
+		}
+
+
+	.feature {
+		background-color: rgba(144, 144, 144, 0.075);
+	}
+
+/* Button */
+
+	input[type="button"],
+	button,
+	.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		border-radius: 2.5em;
+		border: 0;
+		cursor: pointer;
+		display: inline-block;
+		font-weight: 700;
+		height: 2.85em;
+		line-height: 2.95em;
+		min-width: 10em;
+		padding: 0 1.5em;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;}
+
+		input[type="button"].icon,
+		button.icon,
+		.button.icon {
+			padding-left: 1.35em;
+		}
+
+			input[type="button"].icon:before,
+			button.icon:before,
+			.button.icon:before {
+				margin-right: 0.5em;
+			}
+
+		input[type="button"].fit,
+		button.fit,
+		.button.fit {
+			display: block;
+			margin: 0 0 1em 0;
+			width: 100%;
+		}
+
+		input[type="button"].small,
+		button.small,
+		.button.small {
+			font-size: 0.8em;
+		}
+
+		input[type="button"].big,
+		button.big,
+		.button.big {
+			font-size: 1.2em;
+			height: 3.25em;
+			line-height: 3.25em;
+			padding: 0 2.5em;
+		}
+
+		input[type="button"].disabled,
+		input[type="button"]:disabled,
+		button.disabled,
+		button:disabled,
+		.button.disabled,
+		.button:disabled {
+			cursor: default;
+			opacity: 0.25;
+		}
+
+		@media screen and (max-width: 980px) {
+
+
+			input[type="button"].big,
+			button.big,
+			.button.big {
+				font-size: 1em;
+			}
+
+		}
+
+		@media screen and (max-width: 480px) {
+
+
+			input[type="button"],
+			button,
+			.button {
+				padding: 0;
+			}
+
+		}
+
+
+	input[type="button"],
+	button,
+	.button {
+		background-color: #8bc1bf;
+		box-shadow: none;
+		color: #fff !important;
+	}
+
+		input[type="button"].icon:before,
+		button.icon:before,
+		.button.icon:before {
+			color: #999;
+		}
+
+		input[type="button"]:hover,
+		button:hover,
+		.button:hover {
+			background-color: #8bc1bf;
+		}
+
+		input[type="button"]:active,
+		button:active,
+		.button:active {
+			background-color: #8bc1bf;
+		}
+
+		input[type="button"].special,
+		button.special,
+		.button.special {
+			background-color: #8bc1bf;
+			box-shadow: none;
+			color: #fff !important;
+		}
+
+			input[type="button"].special:hover,
+			button.special:hover,
+			.button.special:hover {
+				background-color: #8bc1bf;
+			}
+
+			input[type="button"].special:active,
+			button.special:active,
+			.button.special:active {
+				background-color: #8bc1bf;
+			}
+
+			input[type="button"].alt,
+			button.alt,
+			.button.alt {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 2px #8bc1bf;
+			color: #8bc1bf !important;
+		}
+
+			input[type="button"].alt:hover,
+			button.alt:hover,
+			.button.alt:hover {
+				background-color: rgba(144, 144, 144, 0.075);
+			}
+
+			input[type="button"].alt:active,
+			button.alt:active,
+			.button.alt:active {
+				background-color: rgba(144, 144, 144, 0.2);
+			}
 		/* Footer */
 
 	#footer {
@@ -337,8 +570,8 @@
             #map {
             	background: #ffffff;
             	text-align: center;
-            	padding-left:5em;
-	   			padding-bottom: 2em;
+            	padding-left:10%;
+	   			padding-bottom:3%;
                 height: 80%;
                 width: 80%;
 
@@ -348,8 +581,8 @@
 
             	background: #ffffff;
             	text-align: center;
-            	padding-left:5em;
-            	padding-right:5em;
+            	padding-left:10%;
+            	padding-right:3%;
                 height: 80%;
                 width: 80%;
             }
@@ -376,106 +609,28 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="https://hemingz.github.io/heming.github.io/Chinatown-walkable-about.html">Home • 首页</a></li>
-								<li>Context • 背景</a>
-								</li>
-								<li>Insights • 观点</a></li>
-								<li>Strategy • 策略</a></li>
-								<li>Toolkit • 应用</a></li>
+								<li><a href="#">Context • 背景</a>
+								<li>Model • 策略</a></li>
+								<li><a href="https://hemingz.github.io/heming.github.io/research%20tool.html"> Toolkit • 应用</a></li>
 							
 							</ul>
 						</nav>
 						
 				</div>
 			</div>
-	<div id="maintext" >
-				<section class="container">
-				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; font-color:#402f66;">
-					Why do we have to redefine "walkable neighborhoods"?
-				</p>
-				<h2>
-					1. Walkable Neighborhoods & Gentrification
-				</h2>
-			<p>
-				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
-			</p>
-			<p>
-				If we carefully compare the conclusion from Foot Traffic Ahead 2016 and the situation of Chinatown, there is an obvious conflict here. The major communities in Chinatown are neither wealthy nor highly educated. In opposite, it is a low-income, immigrants neighborhood which contains large senior population in the context of gentrification. Chinatown is providing unique and affordable products and services for local resident and immigrants from all over the city. Also, the analysis of data in this report is mainly based on the outcome of <a href="https://www.walkscore.com/NY/New_York"  target="_blank" id="linkText">Walk Score</a>, which is a private company that assigns walkability scores to any address in the United States and provides ranks of walkable cities and neighborhoods. <strong>Walk Score ranks New York City as the most walkable city in America and Chinatown as the 3rd most walkable neighborhood in New York. </strong>Due to its historical and cultural causes, Chinatown has compact neighborhoods pattern and high residential and commercial densities, which helps this neighborhood getting excellent performance on walkability index, if only take quantitative analysis into account. According to the research of The Pedestrian Pound, <strong>however, each point increase in Walk Score will lead to greater than 328% increase of property values.</strong> It's hard to say whether the gentrification in Chinatown is mainly due to Walk Score, but we do see some real estate developers are using the concept of "walkable neighborhood" in their advertisement. 
- 
+			<iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=12a5jWHIy8cT2EPXrvBSk-EfJFKxiHC6kDGjlpQXr9oo&font=Default&lang=en&initial_zoom=2&height=650' width='100%' height='650' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>
 
-			</p>
-
-				</section>
-				
-	</div>
-	<div id="contextimg">
-		<img  style="width:60%;height:60%;" src="http://i.imgur.com/E1mtcsa.jpg"></img>
-	</div>
-
-<div id="maintext" >
-				<section class="container">
-			<h2>
-					2. Walkable Neighborhoods & Poor Conditions
-			</h2>
-			<p>Besides walking distance and neighborhoods pattern, if we take a close look at the other measurements of walkability such as physical walking environment and pedestrian volume, it is difficult to draw a single conclusion whether Chinatown is a walkable neighborhood. Suffering from narrow streets, uneven sidewalks and air pollutions, the streets in Chinatown are considered as blight and broken by many exports.
-			</p>
-			</section>
-				
-	</div>
-
-
-			<div class="wrapper style2">
-				<section class="container">
-					<div class="subimage">
-						<section class="4u">
-							<a href="#" class="image feature"><img src="http://i.imgur.com/6zLnFQ4.jpg" alt=""></a>
-						</section>
-						<section class="4u">
-							<a href="#" class="image feature"><img src="http://i.imgur.com/tvOy5Py.jpg" alt=""></a>
-						</section>
-						
-						<section class="4u">
-							<a href="#" class="image feature"><img src="http://i.imgur.com/JSFLf6V.jpg" alt=""></a>
-						</section>
-	
-					</div>
-				</section>
-			</div>
-
-		<div id="maintext" >
-				<section class="container">
-				<h2>
-					3. Walkable Neighborhoods & Lacking Public Participation
-				</h2>
-			<p>
-			In the name of building "better walking environment for pedestrians" and promoting "quality of life", several design proposals equip the idea of place-making to address the physical issues. A currently example is the study on <a href="http://www.nyc.gov/html/mancb3/downloads/fellowship/Chinatown%20Pedestrian%20Circulation%20Study.pdf"  target="_blank">Chinatown pedestrian circulation</a> from Community Board 3 in 2016. In this study, the researcher identified several challenges and opportunities for improving pedestrian circulation only on East Broadway (even CB3 called this research as "Chinatown" Pedestrian Circulation Study) and developed some strategies and design proposals such as "install painted curb extensions", "increase access to bicycle parking", and "investigate potential intercity bus stop violations" for promoting walking environment in Chinatown by using non-participant observation method. There is one statement in the study actually point out the issue that <strong>"If possible, conduct interviews with local business owners and residents to determine their thoughts and suggestions for improving pedestrian circulation and challenges to pedestrian movement on East Broadway.</strong>" The researcher, who is not from Asian background, is the outsider of the Chinese community, and he used standard design guidebook and case studies from other American neighborhoods to identify the problems here and develop his insights for Chinatown without listening to the voice of local communities. 
-
-
-			</p>
-			</section>
-		</div>
-
-		<div id="contextimg">
-		<img  style="width:55%;height:55%;" src="http://i.imgur.com/k6wt1aB.png"></img>
-		</div>
-
-		<div id="maintext" >
-				<section class="container">
-				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; line-height: 40px;">
-				How can we unpack the meaning of "walkable neighborhoods" to the communities in Chinatown and let their voice be heard?
-				</p>
-			<p>
-				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
-			</p>
-
-				</section>
-				
-	</div>
-
-<!--map1-->
+			<!--map1-->
 
 	 <h3 style="text-align: center;">NYC Commuting Types</h3>
 	 <div id="maintext" >
 				<section class="container">
+			<p style="padding-left: 10%; padding-right: 10%; font-style: italic; font-family: Georgia; font-size: 16px; line-height: 23px; color: #a0a0a0; ">
+				"Chinatown's economic mix enables it to serve as a "one stop" destination for residents, workers and visitors: you can stop by the pharmacy before going to work and then grab dinner and a cultural performance, all without leaving the neighborhood...The overlap between sectors for both workers and residents is further supported by the high percentages of residents who walk to work."
+			</p>
+			<p style="padding-left: 10%; padding-right: 10%; font-style: italic; font-family: Georgia; font-size: 16px; line-height: 23px; color: #a0a0a0; text-align: right;">
+				--The Plan for Chinatown and Surrounding Areas
+			</p>
 			<p>
 			According to the data from <a href="https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t#acsST"  target="_blank">American Community Survey</a>, the map bellow shows the commuting types to work in 2014. Comparing among three main categories of commuting types, you can figure out which neighborhoods have more people <span class="walking" style="text-decoration: underline;">walk to work (>= 25%)</span>, which neighborhoods have more people take <span class="publicTransport" style="text-decoration: underline;">public transportation to work (>= 50%)</span>, and which neighborhoods have more people <span class="driving" style="text-decoration: underline;">drive to work (>= 50%)</span>.<br><em>(Please click the underlined text to filter map data. You can <span class="reset" style="text-decoration: underline;">reset map by clicking here)</span></em></p>
 			</section>
@@ -514,16 +669,16 @@
         </section>
 
  <!--map2-->
-<h3 style="text-align: center;">Chinatown deographic data</h3>
-	  <div id="map2"></div>
-	 <section class="container">
-        <script type="template/html" id="popup-template">
-            <div class="cartodb-popup v2">
-                <a href="#close" class="cartodb-popup-close-button close">x</a>
-                <div class="cartodb-popup-content-wrapper">
+		<h3 style="text-align: center;">Chinatown Demographic Data</h3>
+			  <div id="map2"></div>
+			 <section class="container">
+	        <script type="template/html" id="popup-template">
+	            <div class="cartodb-popup v2">
+	                <a href="#close" class="cartodb-popup-close-button close">x</a>
+	                <div class="cartodb-popup-content-wrapper">
                     <div class="cartodb-popup-content">
                       The median household income range is {{midean_h_1}}
-                    </div>
+                 </div>
                 </div>
                 <div class="cartodb-popup-tip-container"></div>
             </div>
@@ -546,6 +701,130 @@
                
             });
         </script>
+
+    <!-- maincontext -->
+	<div id="maintext" >
+				<section class="container">
+				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; font-color:#402f66;">
+					Why do we have to redefine "walkable neighborhoods"?
+				</p>
+
+
+				<h2>
+					1. Walkable Neighborhoods & Gentrification
+				</h2>
+			<p>
+				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
+			</p>
+			<p>
+				If we carefully compare the conclusion from Foot Traffic Ahead 2016 and the situation of Chinatown, there is an obvious conflict here. The major communities in Chinatown are neither wealthy nor highly educated. In opposite, it is a low-income, immigrants neighborhood which contains large senior population in the context of gentrification. Chinatown is providing unique and affordable products and services for local resident and immigrants from all over the city. Also, the analysis of data in this report is mainly based on the outcome of <a href="https://www.walkscore.com/NY/New_York"  target="_blank" id="linkText">Walk Score</a>, which is a private company that assigns walkability scores to any address in the United States and provides ranks of walkable cities and neighborhoods. <strong>Walk Score ranks New York City as the most walkable city in America and Chinatown as the 3rd most walkable neighborhood in New York. </strong>Due to its historical and cultural causes, Chinatown has compact neighborhoods pattern and high residential and commercial densities, which helps this neighborhood getting excellent performance on walkability index, if only take quantitative analysis into account. According to the research of The Pedestrian Pound, <strong>however, each point increase in Walk Score will lead to greater than 328% increase of property values.</strong> It's hard to say whether the gentrification in Chinatown is mainly due to Walk Score, but we do see some real estate developers are using the concept of "walkable neighborhood" in their advertisement. 
+ 
+
+			</p>
+
+				</section>
+				
+	</div>
+	<div id="contextimg">
+		<img  style="width:50%;height:50%;" src="http://i.imgur.com/E1mtcsa.jpg"></img>
+	</div>
+
+<div id="maintext" >
+				<section class="container">
+			<h2>
+					2. Walkable Neighborhoods & Poor Conditions
+			</h2>
+			<p>Besides walking distance and neighborhoods pattern, which are contribute to Chinatown's high Walk Score, if we take a close look at the other measurements of walkability such as physical environment and pedestrian volumes, it is difficult to come to a single conclusion whether Chinatown is a walkable neighborhood. Suffering from narrow streets, uneven sidewalks and air pollutions, the streets in Chinatown are considered as blight and broken by many exports.
+			</p>
+			</section>
+				
+	</div>
+
+
+			<div class="wrapper style2">
+				<section class="container">
+					<div class="subimage">
+					
+							<a href="#" class="image feature"><img src="http://i.imgur.com/6zLnFQ4.jpg" alt=""></a>
+					
+						
+							<a href="#" class="image feature"><img src="http://i.imgur.com/tvOy5Py.jpg" alt=""></a>
+				
+						
+						
+							<a href="#" class="image feature"><img src="http://i.imgur.com/JSFLf6V.jpg" alt=""></a>
+					
+					</div>
+				</section>
+			</div>
+
+		<div id="maintext" >
+				<section class="container">
+				<h2>
+					3. Walkable Neighborhoods & Lacking Public Participation
+				</h2>
+			<p>
+			In the name of building "better walking environment for pedestrians" and promoting "quality of life", several design proposals equip the idea of place-making to address the physical issues. A currently example is the study on <a href="http://www.nyc.gov/html/mancb3/downloads/fellowship/Chinatown%20Pedestrian%20Circulation%20Study.pdf"  target="_blank">Chinatown pedestrian circulation</a> from Community Board 3 in 2016. In this study, the researcher identified several challenges and opportunities for improving pedestrian circulation only on East Broadway (even CB3 called this research as "Chinatown" Pedestrian Circulation Study) and developed some strategies and design proposals such as "install painted curb extensions", "increase access to bicycle parking", and "investigate potential intercity bus stop violations" for promoting walking environment in Chinatown by using non-participant observation method. There is one statement in the study actually point out the issue that <strong>"If possible, conduct interviews with local business owners and residents to determine their thoughts and suggestions for improving pedestrian circulation and challenges to pedestrian movement on East Broadway.</strong>" The researcher, who is not from Asian background, is the outsider of the Chinese community, and he used standard design guidebook and case studies from other American neighborhoods to identify the problems here and develop his insights for Chinatown without listening to the voice of local communities. 
+
+
+			</p>
+			</section>
+		</div>
+
+		<div id="contextimg">
+		<img  style="width:55%;height:55%;" src="http://i.imgur.com/k6wt1aB.png"></img>
+		</div>
+
+		<div id="maintext" >
+				<section class="container">
+				<p style="font-family: 'Noteworthy', 'Myriad Pro', sans-serif; padding-top:30px; font-size: 30px; font-style: italic; text-align: left; line-height: 40px;">
+				How can we unpack the meaning of "walkable neighborhoods" to the communities in Chinatown and let their voice be heard?
+				</p>
+			<p>
+				In the report: <a href="https://smartgrowthamerica.org/resources/foot-traffic-ahead-2016/" target="_blank">Foot Traffic Ahead 2016</a>, which analyzes the walkability for America's 30 largest metros using data on 619 walkable urban neighborhoods. According to this report, research shows that New York City is the most walkable city in America. Also, the most interesting part of this report examines the connections between walkability and economic development, education, and social equity. <strong>The conclusion of this report claims that America's walkable neighborhoods are both wealthier and more highly educated. In addition, the walkable neighborhood has better performance in social equity.</strong>
+			</p>
+
+				</section>
+				
+	</div>
+
+
+
+        <!-- content -->
+			<section id="one" class="style1">
+				<div class="inner">
+				<section class="container">
+				<p style="padding-top:30px; font-size: 30px; font-style: italic; text-align: center; font-weight: 700; color: #8bc1bf;">
+					You can move to...
+				</p>
+					
+					<article class="feature right">
+						<span class="image"><img src="http://i.imgur.com/kkL38sh.jpg" alt="" /></span>
+						<div class="content">
+							<h2>A new model for redefine "walkable neighborhood"</h2>
+							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify; text-decoration: italic;">How to engage public participation in the process of defining "walkable neighborhoods" in the low-income Chinese immigrant communities? What are the values they precious in the street activities and how those activities influence their route preference and emotions? To answer these questions, I developed a innovational model by using storytelling methods and tools to expose the meaning of "walkable Chinatown" through communities' eyes. </p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature left">
+						<span class="image"><img src="http://i.imgur.com/xnPmAUz.jpg" alt="" /></span>
+						<div class="content">
+							<h2>Toolkit: use muti-methods storytelling tools to redefine "walkable neighborhoods"</h2>
+							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify;">Based on the innovational model, here is the value-oriented toolkit for practitioners to explore the feasible multi-method tools to gather communities’ everyday stories and insights. This toolkit is designed for identifying values and issues of walking in Chinatown, for making communities voice be heard by the wider public, for encouraging decision-makers and researchers to develop more adoptive plans for walkable low-income immigrants neighborhoods.
+							</p>
+							<ul class="actions">
+								<li>
+									<a href="https://hemingz.github.io/heming.github.io/research%20tool.html" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+				</div>
+			</section>
        
       
         <!-- Footer -->
