@@ -300,7 +300,7 @@
 			padding-left:14em;
 			padding-right:14em;
 			font-size: 15px;
-			line-height: 1.8em;
+			line-height: 1.5em;
 			word-spacing: 0.7px;
 			background: #fff;
 			text-align: justify;
@@ -578,11 +578,11 @@
             }
 
             #map2{
-
             	background: #ffffff;
             	text-align: center;
             	padding-left:10%;
             	padding-right:3%;
+            	padding-bottom:3%;
                 height: 80%;
                 width: 80%;
             }
@@ -610,7 +610,7 @@
 							<ul>
 								<li><a href="https://hemingz.github.io/heming.github.io/Chinatown-walkable-about.html">Home • 首页</a></li>
 								<li><a href="#">Context • 背景</a>
-								<li><a href="https://hemingz.github.io/heming.github.io/model.html">Model • 策略</a></li>
+								<li>Model • 策略</a></li>
 								<li><a href="https://hemingz.github.io/heming.github.io/research%20tool.html"> Toolkit • 应用</a></li>
 							
 							</ul>
@@ -766,41 +766,111 @@
 		</section>
 		</div>
 
-
-
-		<!--map2-->
-		<h3 style="text-align: center;">Chinatown Demographic Data</h3>
-			  <div id="map2"></div>
-			 <section class="container">
-	        <script type="template/html" id="popup-template">
-	            <div class="cartodb-popup v2">
-	                <a href="#close" class="cartodb-popup-close-button close">x</a>
-	                <div class="cartodb-popup-content-wrapper">
-                    <div class="cartodb-popup-content">
-                      The median household income range is {{midean_h_1}}
-                 </div>
-                </div>
-                <div class="cartodb-popup-tip-container"></div>
-            </div>
-        </script>
-
-		 <script>
-	        var demographic;
-            $(document).ready(function () {
-                cartodb.createVis('map2', 'https://thenewschool.carto.com/u/heming/api/v2/viz/854da1dc-1f29-11e7-a9e2-0ee66e2c9693/viz.json',
-                    {
-            cartodb_logo:false,
-	        layer_selector: true,
-	        zoom: 13,})
-                .done(function (vis, layers) {
-                        demographic = layers[1].getSubLayer(1);
-                        demographic.infowindow.set('sanitizeTemplate', false);
-                        demographic.infowindow.set('template', $('#popup-template').html());
-                    });; 
+        
+        <h3 style="text-align: center;">Who is walking in what environment of Chinatown?</h3>
+        <div id="map2">
+       <!--  <section class="container">
+ -->
+        <select class="type-picker">
             
-               
+             <option value="1">Median Household Income</option>
+             <option value="2">Senior Population</option>
+             <option value="3">Motor Vehicle Collision (2016)</option>
+             <option value="4">Tree Census Data</option>
+             <option value="5">pm2.5</option>
+             <option value="6">Asthma Rate</option>
+
+         </select>
+
+        <script>
+            var mapLayer1;
+            var mapLayer2;
+            var mapLayer3;
+            var mapLayer4;
+            var mapLayer5;
+            var mapLayer6;
+          
+
+            $(document).ready(function () {
+                cartodb.createVis('map2', 'https://thenewschool.carto.com/u/heming/api/v2/viz/0dac96fc-b687-11e6-add1-0ecd1babdde5/viz.json',
+                	{
+			            cartodb_logo:false,})
+                    .done(function (vis, layers) {
+                        mapLayer1 = layers[1].getSubLayer(5);
+                        mapLayer2 = layers[1].getSubLayer(4);
+                        mapLayer3 = layers[1].getSubLayer(3);
+                        mapLayer4 = layers[1].getSubLayer(2);
+                        mapLayer5 = layers[1].getSubLayer(1);
+                        mapLayer6 = layers[1].getSubLayer(0);
+                
+                       
+                    });
+
+                     $('.type-picker').change(function () {
+                    var type = $('.type-picker').val();
+                    console.log(type);
+                    var sql;
+                    if (type === '1') {
+                        mapLayer1.show();
+                        mapLayer2.hide();
+                        mapLayer3.hide();
+                        mapLayer4.hide();
+                        mapLayer5.hide();
+                        mapLayer6.hide();
+                    }
+                    
+                     else if (type === '2'){
+                        mapLayer2.show();
+                        mapLayer1.hide();
+                        mapLayer3.hide();
+                        mapLayer4.hide();
+                        mapLayer5.hide();
+                        mapLayer6.hide();
+                    }
+
+                    else if (type === '3'){
+                        mapLayer3.show();
+                        mapLayer1.hide();
+                        mapLayer2.hide();
+                        mapLayer4.hide();
+                        mapLayer5.hide();
+                        mapLayer6.hide();
+                    }
+
+                    else if (type === '4'){
+                        mapLayer4.show();
+                        mapLayer1.hide();
+                        mapLayer3.hide();
+                        mapLayer2.hide();
+                        mapLayer5.hide();
+                        mapLayer6.hide();
+                    }
+
+                    else if (type === '5'){
+                        mapLayer5.show();
+                        mapLayer1.hide();
+                        mapLayer3.hide();
+                        mapLayer4.hide();
+                        mapLayer2.hide();
+                        mapLayer6.hide();
+                    }
+
+                    else if (type === '6'){
+                        mapLayer6.show();
+                        mapLayer1.hide();
+                        mapLayer3.hide();
+                        mapLayer4.hide();
+                        mapLayer5.hide();
+                        mapLayer2.hide();
+                    }
+                     console.log(sql);
+
+                });
             });
         </script>
+        </select>
+        </div>
+       
 
 
 
@@ -819,7 +889,7 @@
 							<p style="line-height: 1.4em; font-size: 16px; padding-right: 2.2em; text-align: justify; text-decoration: italic;">How to engage public participation in the process of defining "walkable neighborhoods" in the low-income Chinese immigrant communities? What are the values they precious in the street activities and how those activities influence their route preference and emotions? To answer these questions, I developed a innovational model by using storytelling methods and tools to expose the meaning of "walkable Chinatown" through communities' eyes. </p>
 							<ul class="actions">
 								<li>
-									<a href="https://hemingz.github.io/heming.github.io/model.html" class="button alt">More</a>
+									<a href="#" class="button alt">More</a>
 								</li>
 							</ul>
 						</div>
