@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Choropleth Tutorial - Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+	<!-- EB added jQuery here to watch for events on the type picker -->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+	<style>#map { width: 880px; height: 600px; z-index:10; }
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #91e0cb; }
+.legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+/*new*/
+#title {position: absolute; left: 920px; top: 0px; width: 300px; z-index:4; font-size: 23px;color: #91e0cb;}
+#infoPlace {position: absolute; left: 920px; top: 150px; width: 300px; z-index:5;} 
+#infoImg {position: absolute; left: 920px; top: 220px; width: 300px; z-index:5;} 
+#legend {position: absolute; left: 920px; top: 520px; width: 200px; z-index:5;} 
+#img {position: absolute; left: 920px; top: 320px; width: 300px; z-index:6;} 
+#dropdown.type-picker{position: absolute; left: 60px; top: 0px;  z-index:10;} 
+
+		/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+    font-family: 'Myriad Pro', sans-serif;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+        text-decoration:none;
+    }
+ 
+        .tab-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px 3px 0px 0px;
+            background:#8bc1bf;
+            font-size:16px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+            text-decoration:none;
+        }
+ 
+        .tab-links a:hover {
+            background:#8bc1bf;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#ffffff;
+        color:#8bc1bf;
+        text-decoration:none;
+
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .tab-content {
+        padding-left: 10%;
+        padding-right: 10%;
+        border-radius:3px;
+        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+        background:#fff;
+        font-family: 'Myriad Pro', sans-serif;
+        font-size: 18px;
+        text-align: justify;
+        line-height: 30px;
+
+    }
+ 
+        .tab {
+        
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+/*tabimge*/
+        #img1
+        {
+			width: 80%; 
+			padding-left: 10%;
+        }
+
+        #img2
+        {
+			width: 80%; 
+			padding-left: 10%;
+			padding-top: 5%;
+        }
+        #img3
+        {
+			width: 75%; 
+			padding-left: 12%;"
+        }
+
+         #img4
+        {
+			width: 65%; 
+			padding-left: 20%;
+			padding-bottom: 5%;
+        }
+
+/*tabsubtitle*/
+		#tabSubtitle
+		{
+			font-size: 20px; 
+			font-style: italic; 
+			font-weight: 400; 
+			color: #8bc1bf; 
+			text-align: center
+
+		}
+/*z-index is control the layer*/
+</style>
+</head>
+<body>
+<!-- dropdown options-->
+<div id="dropdown">
+<select class="type-picker">
+            
+             <option value="0">All the routes</option>
+             <option value="1">route of residents 1</option>
+             <option value="2">route of residents 2</option>
+             <option value="3">route of worker</option>
+             <option value="4">route of visitor 1</option>
+             <option value="5">route of visitor 1</option>
+</select>
+</div>
+
+<div id='map'></div>
+<div id='title'>
+<h4>Chinatown Rethinks<br>Walkable Neighborhoods<br><span style="color: #506e9e; font-size: 18px;">Communities’ Routes Map</span>
+</h4>
+</div>
+<div id='infoPlace'>
+Please select a route
+</div>
+<div id='infoImg'>
+<p id="pointtext">
+Please click a point
+</p>
+<img id="pointimg" src="transparent.gif" width="300">
+</div>
+<div id='legend'>
+<img id="pointimg" src="legend.png" width="180">
+</div>
+
+<script type="text/javascript" src="routeFIX.js"></script>
+<script type="text/javascript" src="points.js"></script>
+
+<script type="text/javascript">
+ var infoBox = document.getElementById("infoPlace");
+ var infoBox2 = document.getElementById("infoImg");
+  var pointtxt = document.getElementById("pointtext");
+  var pointimage = document.getElementById("pointimg");
+
+	var map = L.map('map').setView([40.713863, -73.991393], 14.5);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/hemingzhang/cj19ifw3k00342rpaklhvl0cw/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVtaW5nemhhbmciLCJhIjoiY2l1aXVsdzFyMDBucjJ5bDMzdmo2MDE5dSJ9.mwrSwxasdv8I1K75zqTbeA', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="#">Mapbox</a>',
+		id: 'mapbox.light'
+	}).addTo(map);
+
+
+	// control that shows state info on hover
+	var info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+	info.update = function (props) {
+	};
+
+	info.addTo(map);
+
+
+	// get color depending on population density value
+	function getColor(id) {
+		return  id == 1 ? '#60adbc' :
+				id == 2  ? '#d858cb' :
+				id == 3  ? '#80c960' :
+				id == 4  ? '#FC4E2A' :
+				id == 5   ? '#FD8D3C' :
+				
+							'#FFEDA0';
+	}
+
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: getColor(feature.properties.id),
+			
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 2,
+			color: '#fffa75',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+		infoBox.innerHTML = 'This is the route of a ' + layer.feature.properties.relation + ', at age ' + layer.feature.properties.age + ',</b> who is usually walking in Chinatown for ' + layer.feature.properties.activities + '.'; 
+		
+	}
+
+	var geojson;
+	var points;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		points.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	geojson = L.geoJson(statesData, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+	points = L.geoJson(pointsData, {
+		style: function(feature) {
+        return {color: getColor(feature.properties.id)};
+    },
+    pointToLayer: function(feature, latlng) {
+        return new L.CircleMarker(latlng, {radius: 2, fillOpacity: 1});
+    },
+    onEachFeature: function (feature, layer) {
+        layer.on('click', function() { pointtxt.innerHTML = "This is a " + layer.feature.properties.point;
+        	if (layer.feature.properties.img == null){
+        		pointimage.src = "transparent.gif"
+        	}
+        	else (pointimage.src = layer.feature.properties.img)
+         });
+
+    }
+		// onEachFeature: onEachFeature
+	}).addTo(map);
+
+	map.attributionControl.addAttribution('Project Info @ <a href="https://hemingz.github.io/heming.github.io/Chinatown-walkable-about.html">Chinatown-walkable</a>');
+
+	$(document).ready(function () {
+	    $('.type-picker').change(function () {
+		var selectedRoute = $('.type-picker').val();
+		geojson.eachLayer(function (layer) {
+		    if (layer.feature.properties.id != selectedRoute) {
+			// If the layer's id is different from the selected one, remove it from the map
+			map.removeLayer(layer);
+		    }
+		    else {
+			// Otherwise add it do the map
+			map.addLayer(layer);
+		    }
+		});
+	    });
+	});
+
+	$(document).ready(function () {
+	    $('.type-picker').change(function () {
+		var selectedRoute = $('.type-picker').val();
+		points.eachLayer(function (layer) {
+		    if (layer.feature.properties.id != selectedRoute) {
+			// If the layer's id is different from the selected one, remove it from the map
+			map.removeLayer(layer);
+		    }
+		    else {
+			// Otherwise add it do the map
+			map.addLayer(layer);
+		    }
+		});
+	    });
+	});
+</script>
+
+		<!--tab-->
+		<div class="tabs">
+		    <ul class="tab-links">
+		        <li class="active"><a href="#tab1">ABOUT</a></li>
+		        <li><a href="#tab2">METHODS</a></li>
+		        <li><a href="#tab3">CONTACT</a></li>
+		    </ul>
+		 
+		    <div class="tab-content">
+		        <div id="tab1" class="tab active">
+		            <p>#1 What is this map for?</p>
+		            <p style="padding-left: 10%; padding-right: 10%; font-style: italic; font-family: Georgia; font-size: 16px; line-height: 26px; color: #a0a0a0; ">
+						"By rearranging numeric data, reinterpreting qualitative information, coating information geographically, and building visual taxonomies, we can develop a diagrammatic visualization—a sort of graphic shortcut—to describe and unveil the hidden connections of complex systems."
+					</p>
+					<p style="padding-left: 10%; padding-right: 10%; font-style: italic; font-family: Georgia; font-size: 16px; line-height: 23px; color: #a0a0a0; text-align: right;">
+						--DensityDesign
+					</p>
+
+					<p style="line-height: 29px; text-align: left;">
+						Understanding urban patterns and foot traffic in one neighborhood is not difficult…<br>
+						Researching the demographic characters in one neighborhood is not difficult…<br>
+						Analyzing the streets physical conditions and environments is not difficult…<br>
+						But do you really know the community on the street?
+					</p>
+
+		            <p>
+						How to reflect people’s real life on the street? How to make the complex and invisible social and cultural networks more accessible? When we talk about the topic on walking, there is no way to avoid looking at the spatial elements of the neighborhood. However, when talking about walking and mapping, it is easy to forget “human” as the protagonist of street lives. Experts translate human beings into dots and people’s routes into lines without carefully considerations such as who the pedestrians are, why they choose certain routes, and what the experience on the street. 
+		            </p>
+		            <p>
+		            	
+				          Based on the previous research outcomes of my <a href="https://hemingz.github.io/heming.github.io/Chinatown-walkable-about.html" target="_blank">thesis project</a>, my insights on walking issue in Chinatown is that it's crucial to understand pedestrians relations with Chinatown. For example, beforehand, I assumed the primary target of my research survey would be the residents of Chinatown. However, after asking 28 people for participating the survey, there were only four people actually live in Chinatown, and there were another three respondents live nearby Chinatown. I was surprised by this result. This point also unfolds the importance of visualizing the  pedestrians purpose  on the streets since we cannot understand their relations to Chinatown communities, and what attract them on the street by directly observe where they stand or walk as outsiders without any interaction with people.
+		            </p>
+		            
+		            <p>
+		            	To engage the spatial contexts and provide more humanistic aspects of the spatially-embedded argument, this project used the idea of deep mapping. <span style="color: #8bc1bf;">Deep maps are finely detailed, multimethod depictions of a place and the people, objects, and emotions that exist within it and which are inseparable from the activities of everyday life. These depictions may encompass the beliefs, desires, hopes, and fears of residents and help show what ties one place to another.</span> Deep mapping, as a geographical express of neighborhoods’ value, is related to communities’ daily places, such as the streets they walk on every day, the grocery stores or bakeries they frequent most. Those points and routes make up our neighborhoods and our complex societies. Audiences of this map will feel more specific and will engage more into the discussion.
+		            	<br>
+						<br>
+						<br>
+		            </p>
+		        </div>
+		 
+		        <div id="tab2" class="tab">
+		            <p>#2 The idea behind the map</p>
+		            	<section class="container">
+
+		            <p>
+		            	<span id="tabSubtitle">PHRASE 1.0:  Redefine Chinatown</span> <br><br>
+		            	Tools:  Google map, QGIS, Carto, and some codes...<br><br>
+						The insight of mine to the "official" territory of Chinatown is that there is no line or sign to let walkers aware that they are walking in Chinatown. Meanwhile, from the experience of my everyday life and background research, I noticed the activities’ area of Chinese people is not limited by the invisible “boundary”. The most frequent method we use to get the information of Chinatown’s territory from Google map. When I showed Google map to some long-term residents, they all said this boundary didn’t make sense, and someone who thought he lives in Chinatown but the address is outside this boundary. <br><br>
+
+						To critique and redefine the territory of Chinatown, firstly, I mapped 1303 stores which have Chinese characters on them manually. I mapped each first-floor store in Google Street View then I did the filed research to check the current status of them on the streets. <br><br>
+						Based on the previous offline GIS mapping, I have shot more than 380 photos on the streets for each hexagon. By embedding photos into online map, I hope people can compare both built environment and street activities among different hexagons from low density of Chinese signs and high density ones.<br><br>
+
+						You can check the <a href="https://thenewschool.carto.com/u/heming/builder/b20d780a-ad19-11e6-9adb-0ee66e2c9693/embed" target="_blank">online map here!</a>
+		            </p>
+
+		            <p>
+		            	<span id="tabSubtitle">PHRASE 2.0:  On-street Survey</span> <br><br>
+		            	Tools:  Questionnaires, pens, and smile!!<br><br>
+						Survey is one of the most frequent and important methods in participant observation research. It helps us gain more direct and objective understanding of communities in Chinatown. In the first section of my survey, I asked people about their daily routes and places they frequent most. Then I marked down the lines and points based on their narratives.<br><br>
+
+					For more information of the survey, you can <a href="https://hemingz.github.io/heming.github.io/research%20tool.html" target="_blank">click here!</a>
+		            </p>
+
+		            <a href="https://static1.squarespace.com/static/58d33d0bc534a598c8b95b01/t/58dc4f80b8a79b2ace7d8a9d/1490833282478/Questionnaire-Eng-Digital.pdf" target="_blank"><img id="img1" src="https://i.imgur.com/BNihF7R.png" alt=""></a>
+		            <p style="font-style: italic; font-size: 16px; color: #a0a0a0; text-align: center;">
+		            (Please click the image below to explore the questionnaire)
+					</p>
+
+					<p>
+		            	<span id="tabSubtitle">PHRASE 3.0:  Put Everything into Digital</span> <br><br>
+		            	Tools:  QGIS, patience, patience, and patience...<br><br>
+						<img id="img1" src="https://i.imgur.com/m9a6dSP.jpg"/>
+					</p>
+
+					<p>
+		            	<span id="tabSubtitle">PHRASE 3.1:  Make it Interactive! ❤</span> <br><br>
+		            	Tools:  Leaflet and Github! Wait, you know html, css, Javascript and jQuery, right?<br><br>
+						Then I got everything online!<br><br><br>
+		            </p>
+				
+		        </div>
+		 
+		        <div id="tab3" class="tab">
+		            <p>#3 Let's keep in touch!!</p>
+		            <div >
+		            	<img style="position: 20px; width: 280px;" src="https://i.imgur.com/YTVGOeJ.png">
+		            </div>
+
+		            <div>
+		            <p style="position: absolute; left: 450px; top: 725px; width: 600px; font-size: 16px; line-height: 1.8em;">
+		            <span style="font-size: 20px; color: #8bc1bf; text-decoration: italic;">Hello! My name is Heming Zhang!</span>
+		            <br>
+		            I’m an urban strategies designer based on New York City. I have professionally worked as an urban planner and urban researcher. I love to interact with and follow people's everyday life to find tactics which can unpack and satisfy their real demands.  I’m passionate about the diversity of New York City. Therefore, I believe that participatory community design and public pedagogy will foster more inclusive strategies and projects that can promote better cities for everyone.
+
+		            <br><br>For more information, please visit <a href="https://www.heming-up.me/" target="_blank">my website</a>!
+		            <br>Email: zhanh525@newschool.edu
+
+					</p>
+					</div>
+					
+		        </div>
+		    </ul>
+		    </div>
+		</div>
+			<script>
+	jQuery(window).load(function() {
+        var currentAttrValue = jQuery('.tab.active').siblings().hide();
+    });
+
+	jQuery(document).ready(function() {
+    jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+		 // Show/Hide Tabs
+		jQuery('.tabs ' + currentAttrValue).fadeIn(400).siblings().hide();
+
+ 
+        // Change/remove current tab to active
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+        // Show/Hide Tabs
+		jQuery('.tabs ' + currentAttrValue).fadeIn(400).siblings().hide();
+
+    });
+});
+</script>
+
+</body>
+</html>
