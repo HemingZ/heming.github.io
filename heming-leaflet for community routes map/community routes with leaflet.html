@@ -17,7 +17,11 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 
-	<style>#map { width: 880px; height: 600px; z-index:10; }
+	<style>
+	a {
+		color: #8bc1bf;
+	}
+#map { width: 880px; height: 600px; z-index:1; }
 .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #91e0cb; }
 .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
 /*new*/
@@ -26,7 +30,7 @@
 #infoImg {position: absolute; left: 920px; top: 220px; width: 300px; z-index:5;} 
 #legend {position: absolute; left: 920px; top: 520px; width: 200px; z-index:5;} 
 #img {position: absolute; left: 920px; top: 320px; width: 300px; z-index:6;} 
-#dropdown.type-picker{position: absolute; left: 60px; top: 0px;  z-index:10;} 
+.type-picker{position: absolute; left: 60px; top: 20px;  z-index:2;} 
 
 		/*----- Tabs -----*/
 .tabs {
@@ -34,6 +38,7 @@
     display:inline-block;
     font-family: 'Myriad Pro', sans-serif;
 }
+
  
     /*----- Tab Links -----*/
     /* Clearfix */
@@ -175,7 +180,7 @@ Please click a point
   var pointtxt = document.getElementById("pointtext");
   var pointimage = document.getElementById("pointimg");
 
-	var map = L.map('map').setView([40.713863, -73.991393], 14.5);
+	var map = L.map('map',{scrollWheelZoom: false}).setView([40.713863, -73.991393], 14.5);
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/hemingzhang/cj19ifw3k00342rpaklhvl0cw/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVtaW5nemhhbmciLCJhIjoiY2l1aXVsdzFyMDBucjJ5bDMzdmo2MDE5dSJ9.mwrSwxasdv8I1K75zqTbeA', {
 		maxZoom: 18,
@@ -297,6 +302,10 @@ Please click a point
 			// Otherwise add it do the map
 			map.addLayer(layer);
 		    }
+		    if (selectedRoute == 0)
+		    {
+		    	map.addLayer(layer);
+		    }
 		});
 	    });
 	});
@@ -312,6 +321,10 @@ Please click a point
 		    else {
 			// Otherwise add it do the map
 			map.addLayer(layer);
+		    }
+		     if (selectedRoute == 0)
+		    {
+		    	map.addLayer(layer);
 		    }
 		});
 	    });
