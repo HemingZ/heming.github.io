@@ -289,10 +289,28 @@ Please click a point
 	}).addTo(map);
 
 	map.attributionControl.addAttribution('Project Info @ <a href="https://hemingz.github.io/heming.github.io/Chinatown-walkable-about.html">Chinatown-walkable</a>');
+	var typeText0 = "All routes!"
+
+	var	typeText1 ="This is the route of a resident, at age 71, who is usually walking in Chinatown for social & working.";
+
+	var	typeText2 ="This is the route of a resident, at age 62, who is usually walking in Chinatown for social & exercise.";
+
+	var	typeText3 ="This is the route of a worker, at age 32, who is usually walking in Chinatown for working & shopping.";
+
+	var	typeText4 ="This is the route of a visitor, at age 63, who is usually walking in Chinatown for shopping.";
+
+	var	typeText5 ="This is the route of a visitor, at age 23, who is usually walking in Chinatown for shopping.";
+
+	var allText = [typeText0, typeText1, typeText2, typeText3, typeText4, typeText5];
+
 
 	$(document).ready(function () {
 	    $('.type-picker').change(function () {
 		var selectedRoute = $('.type-picker').val();
+		    
+		console.log(selectedRoute)
+		$("#infoPlace").text(allText[selectedRoute])
+		    
 		geojson.eachLayer(function (layer) {
 		    if (layer.feature.properties.id != selectedRoute) {
 			// If the layer's id is different from the selected one, remove it from the map
